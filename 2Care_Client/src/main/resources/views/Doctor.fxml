@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane styleClass="grid-pane" prefHeight="400.0" prefWidth="600.0" stylesheets="/css/DoctorStyle.css" vgap="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DoctorController">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="33.0" />
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="33.0" />
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="33.0" />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints percentHeight="25" valignment="CENTER" />
+        <RowConstraints percentHeight="25" valignment="BOTTOM" />
+        <RowConstraints percentHeight="25" valignment="TOP" />
+        <RowConstraints percentHeight="25" valignment="CENTER" />
+    </rowConstraints>
+   <children>
+      <TextField styleClass="search-patients-text-field" fx:id="searchPatients" promptText="Search patient" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets left="15.0" top="25.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <ListView styleClass="patients-list-view" fx:id="patientsListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowSpan="4">
+         <GridPane.margin>
+            <Insets bottom="15.0" left="15.0" top="100.0" />
+         </GridPane.margin></ListView>
+   </children>
+
+</GridPane>
