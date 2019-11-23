@@ -2,6 +2,7 @@
 
 import domain.UserAccount;
 import repositories.UserAccountDBRepository;
+import serving.ServeClient;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -10,20 +11,15 @@ import java.net.Socket;
 public class MainServer {
     public static void main(String[] args) throws IOException {
         ServerSocket server = null;
-        UserAccountDBRepository userAccountDBRepository = new UserAccountDBRepository("jdbc:postgresql://localhost:5432/2CareDB", "postgres", "Super_paSS");
+        UserAccountDBRepository userAccountDBRepository = new UserAccountDBRepository("jdbc:postgresql://localhost:5432/2CareDB", "postgres", "1234");
+        userAccountDBRepository.save(new UserAccount(1,"asd","asd",true));
         try {
             server = new ServerSocket(1256);
             while(true) {
                 Socket client = server.accept();
-                ObjectInputStream in = new ObjectInputStream(client.getInputStream());
-                String user = (String) in.readObject();
-                String password = (String) in.readObject();
-                System.out.println(user + " " + password);
-                ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
-                out.writeObject(1);
-                client.close();
+                new ServeClient(client,userAccountDBRepository).run();
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             assert server != null;
