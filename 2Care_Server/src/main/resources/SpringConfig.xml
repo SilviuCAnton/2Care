@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-      http://www.springframework.org/schema/data/jpa	http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/jdbc		http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/beans		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx/	http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context	http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/data/jpa	http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd">
 
-    <context:component-scan base-package="domain"/>
-    <jpa:repositories base-package="repositories"
-                      entity-manager-factory-ref="entityManagerFactoryBean"/>
-    <bean id="employeeServiceImpl" class="services.UserAccountServiceImpl" />
+    <context:component-scan base-package="com.insidecoders"></context:component-scan>
+    <jpa:repositories base-package="com.insidecoders"
+                      entity-manager-factory-ref="entityManagerFactoryBean"></jpa:repositories>
+    <bean id="employeeServiceImpl" class="com.insidecoders.EmployeeServiceImpl" />
 
+    <!--EntityManagerFactory -->
     <bean id="entityManagerFactoryBean"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <!-- This makes /META-INF/persistence.xml is no longer necessary -->
-        <property name="packagesToScan" value="domain" />
+        <property name="packagesToScan" value="com.insidecoders" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
         </property>
@@ -38,5 +43,5 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactoryBean" />
     </bean>
-
+    <tx:annotation-driven />
 </beans>
