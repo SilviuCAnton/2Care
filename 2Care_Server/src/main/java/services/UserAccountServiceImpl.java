@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import repositories.UserAccountRepository;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UserAccountServiceImpl implements UserAccountService {
@@ -15,10 +17,11 @@ public class UserAccountServiceImpl implements UserAccountService {
     private UserAccountRepository userAccountRepository;
 
     @Transactional
-    public UserAccount getUserAccountById(int id) {
-        return userAccountRepository.findOne(id);
+    @Override
+    public UserAccount getUserAccountById(Integer id) {
+        Optional<UserAccount> result = userAccountRepository.findById(id);
+        return result.get();
     }
-
 
     @Transactional
     public void saveUserAccount(UserAccount userAccount) {
@@ -32,7 +35,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Transactional
     public void deleteUserAccount(int id) {
-        userAccountRepository.delete(id);
+        userAccountRepository.deleteById(id);
     }
 
     @Transactional
