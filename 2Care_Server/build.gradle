@@ -1,5 +1,9 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.springframework.boot' version '2.1.7.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 }
 
 group 'com.inside.coders'
@@ -9,8 +13,28 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven {
+        url  "https://dl.bintray.com/jerady/maven"
+    }
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.4.2')
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.2')
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+    compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+javafx {
+    version = "13"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
