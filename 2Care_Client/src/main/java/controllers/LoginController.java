@@ -20,7 +20,7 @@ public class LoginController {
     @FXML
     public TextField passwordTextField;
     private LoginService loginService;
-    Socket client;
+    private Socket client;
 
     public void initialize(){
         try {
@@ -43,8 +43,7 @@ public class LoginController {
                 socketOut.writeObject(username);
                 socketOut.writeObject(password);
                 ObjectInputStream socketIn = new ObjectInputStream(client.getInputStream());
-                int connected = socketIn.readInt();
-                connected = 1;
+                int connected =(int) socketIn.readObject();
                 if (connected == 0) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "username or password invalid.");
                     alert.setTitle("Connection error");
@@ -54,7 +53,7 @@ public class LoginController {
                 } else if (connected == 2) {
 
                 }
-            } catch (IOException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
