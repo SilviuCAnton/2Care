@@ -1,12 +1,12 @@
 package domain;
 
-public class Patient extends Entity<String> {
+public class Patient extends Entity<Integer> {
 
     private String firstName;
     private String lastName;
     private String cnp;
 
-    public Patient(String id, String firstName, String lastName, String cnp) {
+    public Patient(Integer id, String firstName, String lastName, String cnp) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cnp = cnp;

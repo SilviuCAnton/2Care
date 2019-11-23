@@ -1,9 +1,9 @@
 package domain;
 
-public class Doctor extends Entity<String> {
+public class Doctor extends Entity<Integer> {
     private String firstName,lastName;
 
-    public Doctor(String doctorId,String firstName, String lastName) {
+    public Doctor(Integer doctorId,String firstName, String lastName) {
         super.setId(doctorId);
         this.firstName = firstName;
         this.lastName = lastName;
