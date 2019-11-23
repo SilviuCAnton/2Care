@@ -9,6 +9,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/2Care_Client" />
+            <option value="$PROJECT_DIR$/2Care_Server" />
           </set>
         </option>
         <option name="useQualifiedModuleNames" value="true" />
