@@ -1,39 +1,18 @@
 package domain;
 
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class UserAccount implements Serializable {
+public class UserAccount extends Entity<Integer> implements Serializable {
 
     private static final long serialVersionUID = -889976693182180703L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID")
-    private int id;
-
-    @Column(name="USERNAME")
-    private String username;
-
-    @Column(name="PASSWORD")
-    private String password;
-
-    @Column(name="ISDOCTOR")
+    private String username, password;
     private boolean isDoctor;
-
-    public UserAccount()
-    {
-        super();
-    }
 
     public UserAccount(int id, String username, String password, boolean isDoctor) {
         super();
-        this.id = id;
+        setId(id);
         this.username = username;
         this.password = password;
         this.isDoctor = isDoctor;
@@ -41,14 +20,6 @@ public class UserAccount implements Serializable {
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -78,7 +49,7 @@ public class UserAccount implements Serializable {
     @Override
     public String toString() {
         return "UserAccount{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", isDoctor=" + isDoctor +
@@ -90,7 +61,7 @@ public class UserAccount implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserAccount that = (UserAccount) o;
-        return id == that.id &&
+        return getId().equals(that.getId()) &&
                 isDoctor == that.isDoctor &&
                 Objects.equals(username, that.username) &&
                 Objects.equals(password, that.password);
@@ -98,6 +69,6 @@ public class UserAccount implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, isDoctor);
+        return Objects.hash(getId(), username, password, isDoctor);
     }
 }
