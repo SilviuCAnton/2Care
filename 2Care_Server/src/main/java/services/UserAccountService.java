@@ -1,8 +1,9 @@
-package com.insideCoders.services;
+package services;
 
-import com.insideCoders.domain.UserAccount;
+import domain.UserAccount;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserAccountService {
     public abstract UserAccount getUserAccountById(Integer id);

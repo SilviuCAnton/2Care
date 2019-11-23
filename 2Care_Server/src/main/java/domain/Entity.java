@@ -1,4 +1,4 @@
-package com.insideCoders.domain;
+package domain;
 
 public abstract class Entity<T> {
     private T id;
@@ -7,7 +7,7 @@ public abstract class Entity<T> {
         return id;
     }
 
-    public void setId(T id) {
+    void setId(T id) {
         this.id = id;
     }
 }
