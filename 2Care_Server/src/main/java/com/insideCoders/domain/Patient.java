@@ -1,4 +1,4 @@
-package domain;
+package com.insideCoders.domain;
 
 public class Patient extends Entity<Integer> {
 

@@ -1,6 +1,6 @@
-package services;
+package com.insideCoders.services;
 
-import domain.UserAccount;
+import com.insideCoders.domain.UserAccount;
 
 import java.util.List;
 

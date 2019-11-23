@@ -1,4 +1,4 @@
-package domain;
+package com.insideCoders.domain;
 
 import org.springframework.data.annotation.Id;
 

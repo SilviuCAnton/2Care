@@ -1,12 +1,11 @@
-package services;
+package com.insideCoders.services;
 
-import domain.UserAccount;
+import com.insideCoders.domain.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import repositories.UserAccountRepository;
+import com.insideCoders.repositories.UserAccountRepository;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package domain;
+package com.insideCoders.domain;
 
 public abstract class Entity<T> {
     private T id;
