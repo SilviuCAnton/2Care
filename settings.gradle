@@ -1,0 +1,4 @@
+rootProject.name = '2Care'
+include '2Care_Client'
+include '2Care_Server'
+
