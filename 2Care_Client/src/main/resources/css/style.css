@@ -1,0 +1,11 @@
+.connect-button {
+    -fx-background-color: #05386b;
+    -fx-text-fill: #edf5e1;
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+
+}
+.connect-button:hover{
+    -fx-background-color: #053686;
+}
+
