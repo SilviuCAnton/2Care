@@ -12,7 +12,6 @@ public class MainServer {
     public static void main(String[] args) throws IOException {
         ServerSocket server = null;
         UserAccountDBRepository userAccountDBRepository = new UserAccountDBRepository("jdbc:postgresql://localhost:5432/2CareDB", "postgres", "1234");
-        userAccountDBRepository.save(new UserAccount(1,"asd","asd",true));
         try {
             server = new ServerSocket(1256);
             while(true) {

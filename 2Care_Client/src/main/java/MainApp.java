@@ -33,6 +33,6 @@ public class MainApp extends Application {
         Parent root = initStudentView();
         Scene scene = new Scene(root, 1200, 900);
         primaryStage.setScene(scene);
-        primaryStage.show();
+        //primaryStage.show();
     }
 }

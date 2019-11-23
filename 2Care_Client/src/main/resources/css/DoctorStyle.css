@@ -1,0 +1,11 @@
+.grid-pane {
+    -fx-background-image: url("/images/background-simple.png");
+}
+
+.search-patients-text-field {
+    -fx-background-color: #fdffff;
+}
+
+.patients-list-view {
+    -fx-background-color: #fdffff;
+}
