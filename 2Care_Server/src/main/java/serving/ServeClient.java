@@ -1,15 +1,20 @@
 package serving;
 
+import domain.Entity;
+import domain.UserAccount;
 import repositories.UserAccountDBRepository;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.Socket;
+import java.util.List;
 
 public class ServeClient implements Runnable {
-    Socket client;
-    UserAccountDBRepository userAccountDBRepository;
+    private Socket client;
+    private UserAccountDBRepository userAccountDBRepository;
 
     public ServeClient(Socket client, UserAccountDBRepository userAccountDBRepository) {
         this.client = client;
@@ -17,9 +22,17 @@ public class ServeClient implements Runnable {
     }
     private void respond(ObjectInputStream in,ObjectOutputStream out){
         try {
-            String command = (String) in.readObject();
+            String command= "";
+            while(!command.equals("x"))
+            {
+                command = (String) in.readObject();
+                userAccountDBRepository.findAll();
+                Method method = userAccountDBRepository.getClass().getMethod(command);
+                List<Entity> all = (List<Entity>) method.invoke(userAccountDBRepository);
+                out.writeObject(all);
 
-        } catch (IOException | ClassNotFoundException e) {
+            }
+        } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
