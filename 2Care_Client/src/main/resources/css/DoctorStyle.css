@@ -9,3 +9,7 @@
 .patients-list-view {
     -fx-background-color: #fdffff;
 }
+.list-cell {
+    -fx-pref-height: 50px;
+    -fx-font-size: 14px;
+}

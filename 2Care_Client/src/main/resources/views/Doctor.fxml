@@ -36,7 +36,8 @@
       <ListView styleClass="patients-list-view" fx:id="patientsListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowSpan="4">
          <GridPane.margin>
             <Insets bottom="15.0" left="15.0" top="100.0" />
-         </GridPane.margin></ListView>
+         </GridPane.margin>
+      </ListView>
    </children>
 
 </GridPane>

@@ -13,6 +13,11 @@ public class Patient extends Entity<Integer> {
         setId(id);
     }
 
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }
