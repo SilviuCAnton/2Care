@@ -4,24 +4,23 @@ import domain.Entity;
 import domain.UserAccount;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.net.Socket;
 import java.nio.channels.UnresolvedAddressException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserAccountRepoProxy implements CrudRepository<Integer, UserAccount>{
     private Socket socket;
     private String command;
 
-    public UserAccountRepoProxy() {
-        try {
-            socket = new Socket("127.0.0.1", 1256);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public UserAccountRepoProxy(Socket socket) {
+        this.socket = socket;
     }
 
 
@@ -41,14 +40,13 @@ public class UserAccountRepoProxy implements CrudRepository<Integer, UserAccount
     }
 
     @Override
-    public Iterable<UserAccount> findAll() {
+    public List<UserAccount> findAll() {
         try {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-            out.writeObject(this.getClass());
             out.writeObject("findAll");
-            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-            return (List<UserAccount>) in.readObject();
-        } catch (IOException | ClassNotFoundException e) {
+            List<UserAccount> all = readIn();
+            return all;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -67,5 +65,11 @@ public class UserAccountRepoProxy implements CrudRepository<Integer, UserAccount
     @Override
     public UserAccount update(UserAccount entity) {
         return null;
+    }
+
+    private List<UserAccount> readIn() {
+        return new ArrayList<>(Arrays.asList(new UserAccount(1,"asd","asd",true),
+                new UserAccount(2,"aef","aef",false),new UserAccount(3,"tbsgr","srhsrh",true),
+                new UserAccount(4,"asd","asd",true),new UserAccount(5,"ztdhzt","thHdsf",false)));
     }
 }
