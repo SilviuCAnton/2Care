@@ -3,6 +3,8 @@ package controllers;
 import animatefx.animation.FadeInLeft;
 import domain.Patient;
 import domain.UserAccount;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,9 +34,13 @@ public class DoctorController {
 
     public void initialize() {
         patientsListView.setItems(userAccounts);
-        patientsListView.selectionModelProperty().addListener((x,y,z)->{
-            System.out.println("sal");
-        });
+        patientsListView.getSelectionModel().selectedItemProperty()
+                .addListener(new ChangeListener<Patient>() {
+                    public void changed(ObservableValue<? extends Patient> observable, Patient oldValue, Patient newValue) {
+                        System.out.println("selection changed");
+
+                    }
+                });
     }
 
 }

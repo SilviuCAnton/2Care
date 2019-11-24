@@ -38,6 +38,11 @@
             <Insets bottom="15.0" left="15.0" top="100.0" />
          </GridPane.margin>
       </ListView>
+       <ListView styleClass="patients-list-view" fx:id="subscribedListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="4">
+           <GridPane.margin>
+               <Insets bottom="15.0" left="15.0" top="100.0" />
+           </GridPane.margin>
+       </ListView>
    </children>
 
 </GridPane>
