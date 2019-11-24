@@ -11,7 +11,7 @@ import java.net.Socket;
 public class MainServer {
     public static void main(String[] args) throws IOException {
         ServerSocket server = null;
-        UserAccountDBRepository userAccountDBRepository = new UserAccountDBRepository("jdbc:postgresql://localhost:5432/2CareDB", "postgres", "Super_paSS");
+        UserAccountDBRepository userAccountDBRepository = new UserAccountDBRepository("jdbc:postgresql://localhost:5432/2CareDB", "postgres", "1234");
         try {
             server = new ServerSocket(1256);
             while(true) {

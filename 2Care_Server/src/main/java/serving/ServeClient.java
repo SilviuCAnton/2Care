@@ -26,6 +26,7 @@ public class ServeClient implements Runnable {
             while(!command.equals("x"))
             {
                 command = (String) in.readObject();
+                System.out.println(command);
                 userAccountDBRepository.findAll();
                 Method method = userAccountDBRepository.getClass().getMethod(command);
                 List<Entity> all = (List<Entity>) method.invoke(userAccountDBRepository);
@@ -42,12 +43,11 @@ public class ServeClient implements Runnable {
         ObjectInputStream in = null;
         try {
             in = new ObjectInputStream(client.getInputStream());
-
             String user = (String) in.readObject();
             String password = (String) in.readObject();
             System.out.println(user + " " + password);
             ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
-            out.writeObject(1);
+            out.writeObject(2);
             respond(in,out);
             client.close();
         } catch (IOException | ClassNotFoundException e) {

@@ -1,5 +1,6 @@
 package controllers;
 
+import domain.Patient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import proxy.UserAccountRepoProxy;
 import services.LoginService;
 
 import java.io.*;
@@ -23,8 +25,6 @@ public class LoginController {
     private Socket client;
 
     public void initialize(){
-
-        loadStage("/views/Doctor.fxml");
     }
 
     public void setService(LoginService loginService) {
@@ -32,39 +32,41 @@ public class LoginController {
     }
 
     public void handleConnectButton(ActionEvent actionEvent) {
-//        try {
-//            client = new Socket("127.0.0.1",1256);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        String username = usernameTextField.getText();
-//        String password = passwordTextField.getText();
-//        if (!username.equals("") && !password.equals("")) {
-//            try {
-//                ObjectOutputStream socketOut = new ObjectOutputStream(client.getOutputStream());
-//                socketOut.writeObject(username);
-//                socketOut.writeObject(password);
-//                ObjectInputStream socketIn = new ObjectInputStream(client.getInputStream());
-//                int connected =(int) socketIn.readObject();
-//                connected = 2;
-//                if (connected == 0) {
-//                    Alert alert = new Alert(Alert.AlertType.ERROR, "username or password invalid.");
-//                    alert.setTitle("Connection error");
-//                    alert.showAndWait();
-//                } else if (connected == 1) { // patient
-//                    loadStage("/views/Patient.fxml");
-//                } else if (connected == 2) {
-//                    loadStage("/views/Doctor.fxml");
-//                }
-//            } catch (IOException | ClassNotFoundException e) {
-//                e.printStackTrace();
-//            }
+        try {
+            client = new Socket("127.0.0.1", 1256);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        String username = usernameTextField.getText();
+        String password = passwordTextField.getText();
+        if (!username.equals("") && !password.equals("")) {
+            try {
+                ObjectOutputStream socketOut = new ObjectOutputStream(client.getOutputStream());
+                socketOut.writeObject(username);
+                socketOut.writeObject(password);
+                ObjectInputStream socketIn = new ObjectInputStream(client.getInputStream());
+                int connected = (int) socketIn.readObject();
+                if (connected == 0) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "username or password invalid.");
+                    alert.setTitle("Connection error");
+                    alert.showAndWait();
+                } else if (connected == 1) { // patient
+                    loadStage("/views/Patient.fxml");
+                } else if (connected == 2) {
+                    loadStage("/views/Doctor.fxml");
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     private void loadStage(String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource(fxml));
             Parent root = loader.load();
+            DoctorController doctorController = loader.getController();
+            doctorController.setUserAccountRepoProxy(new UserAccountRepoProxy(client));
             Stage stage = new Stage();
             stage.setScene(new Scene(root,1200, 900));
             stage.initModality(Modality.APPLICATION_MODAL);
