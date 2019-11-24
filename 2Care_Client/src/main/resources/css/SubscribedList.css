@@ -1,0 +1,12 @@
+.subscribed-list-view {
+
+}
+
+.list-cell {
+    -fx-pref-height: 50px;
+    -fx-font-size: 14px;
+}
+
+.patients-list-view {
+    -fx-background-color: none;
+}
