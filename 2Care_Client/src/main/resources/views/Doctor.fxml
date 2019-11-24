@@ -55,7 +55,7 @@
       </BarChart>
        <LineChart fx:id="barChartWeight" styleClass="subscribed-list-view" stylesheets="/css/SubscribedList.css" GridPane.columnIndex="2" GridPane.rowSpan="4">
            <xAxis>
-               <CategoryAxis fx:id="xAxisWeight" side="BOTTOM" />
+               <NumberAxis fx:id="xAxisWeight" side="BOTTOM" />
            </xAxis>
            <yAxis>
                <NumberAxis fx:id="yAxisWeight" side="LEFT" />
