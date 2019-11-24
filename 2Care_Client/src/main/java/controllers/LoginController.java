@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import proxy.UserAccountRepoProxy;
 import services.LoginService;
 
 import java.io.*;
@@ -63,6 +64,8 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource(fxml));
             Parent root = loader.load();
+            DoctorController doctorController = loader.getController();
+            doctorController.setUserAccountRepoProxy(new UserAccountRepoProxy(client));
             Stage stage = new Stage();
             stage.setScene(new Scene(root,1200, 900));
             stage.initModality(Modality.APPLICATION_MODAL);

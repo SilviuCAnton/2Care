@@ -26,22 +26,22 @@ public class LoginClient implements Runnable {
             e.printStackTrace();
         }
     }
-//    private void respond(ObjectInputStream in,ObjectOutputStream out){
-//        try {
-//            String command= "";
-//            while(!command.equals("x"))
-//            {
-//                command = (String) in.readObject();
-//                userAccountDBRepository.findAll();
-//                Method method = userAccountDBRepository.getClass().getMethod(command);
-//                List<Entity> all = (List<Entity>) method.invoke(userAccountDBRepository);
-//                out.writeObject(all);
-//
-//            }
-//        } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    private void respond(ObjectInputStream in,ObjectOutputStream out){
+        try {
+            String command= "";
+            while(!command.equals("x"))
+            {
+                command = (String) in.readObject();
+                System.out.println(command);
+                Method method = userAccountDBRepository.getClass().getMethod(command);
+                List<Entity> all = (List<Entity>) method.invoke(userAccountDBRepository);
+                out.writeObject(all);
+
+            }
+        } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void run() {
@@ -60,6 +60,7 @@ public class LoginClient implements Runnable {
             else {
                 out.writeObject(1);
             }
+            respond(new ObjectInputStream(client.getInputStream()),out);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
