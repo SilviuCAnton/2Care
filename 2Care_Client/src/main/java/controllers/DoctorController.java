@@ -1,6 +1,8 @@
 package controllers;
 
+import animatefx.animation.FadeIn;
 import animatefx.animation.FadeInLeft;
+import animatefx.animation.FadeInRight;
 import domain.Patient;
 import domain.UserAccount;
 import javafx.beans.value.ChangeListener;
@@ -29,6 +31,7 @@ public class DoctorController {
 
     public void setUserAccountRepoProxy(UserAccountRepoProxy userAccountRepoProxy) {
         this.userAccountRepoProxy = userAccountRepoProxy;
+        subscribedListView.setManaged(false);
         userAccounts.setAll(userAccountRepoProxy.findAllPatients());
     }
 
@@ -38,7 +41,9 @@ public class DoctorController {
                 .addListener(new ChangeListener<Patient>() {
                     public void changed(ObservableValue<? extends Patient> observable, Patient oldValue, Patient newValue) {
                         System.out.println("selection changed");
-
+                        subscribedListView.setManaged(true);
+                        FadeInRight fadeInRight = new FadeInRight(subscribedListView);
+                        fadeInRight.play();
                     }
                 });
     }
