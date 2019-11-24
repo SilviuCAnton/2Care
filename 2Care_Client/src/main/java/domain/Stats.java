@@ -7,23 +7,23 @@ public class Stats extends Entity<Integer> {
     private String bloodPressure;
     private int cholesterol;
     private double weight;
-    private int week;
+    private int day;
 
-    public Stats(Integer id, double steps, String bloodPressure, int cholesterol, double weight) {
+    public Stats(Integer id, double steps, String bloodPressure, int cholesterol, double weight, int day) {
         super.setId(id);
         this.steps = steps;
         this.bloodPressure = bloodPressure;
         this.cholesterol = cholesterol;
         this.weight = weight;
-        this.week = ThreadLocalRandom.current().nextInt(1, 7);
+        this.day = day;
     }
 
-    public int getWeek() {
-        return week;
+    public int getDay() {
+        return day;
     }
 
-    public void setWeek(int week) {
-        this.week = week;
+    public void setDay(int day) {
+        this.day = day;
     }
 
     public double getSteps() {
