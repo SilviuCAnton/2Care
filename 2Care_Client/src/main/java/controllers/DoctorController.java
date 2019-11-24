@@ -31,7 +31,7 @@ public class DoctorController {
     @FXML
     public LineChart barChartWeight;
     @FXML
-    public CategoryAxis xAxisWeight;
+    public NumberAxis xAxisWeight;
     @FXML
     public NumberAxis yAxisWeight;
 
@@ -60,8 +60,8 @@ public class DoctorController {
         barChart.setTitle("Steps Summary");
         xAxis.setLabel("Steps");
         yAxis.setLabel("Value");
-        barChartWeight.setTitle("Weight Summary");
-        xAxisWeight.setLabel("Weight");
+        barChartWeight.setTitle("Weight/Blood Pressure Summary");
+        xAxisWeight.setLabel("Weight/Blood Pressure");
         yAxisWeight.setLabel("Value");
 
         patientsListView.getSelectionModel().selectedItemProperty()
@@ -82,13 +82,13 @@ public class DoctorController {
         if(allStats.size()>0) {
             int lastday = allStats.get(0).getDay(), index = 0;
             XYChart.Series series = new XYChart.Series();
-            series.setName(Integer.toString(lastday));
+            series.setName("Day" + Integer.toString(lastday));
             barChart.getData().add(index++, series);
             allSeries.add(series);
             for (Stats s : allStats) {
                 if (lastday != s.getDay()) {
                     series = new XYChart.Series();
-                    series.setName(Integer.toString(s.getDay()));
+                    series.setName("Day" + Integer.toString(s.getDay()));
                     barChart.getData().add(index++, series);
                     allSeries.add(series);
                 }
@@ -106,18 +106,18 @@ public class DoctorController {
         List<Stats> allStats = userAccountRepoProxy.getAllStatsFromLastWeek(selected.getId());
         if(allStats.size()>0) {
             int lastday = allStats.get(0).getDay(), index = 0;
-            XYChart.Series series = new XYChart.Series();
-            series.setName(Integer.toString(lastday));
-            barChartWeight.getData().add(index++, series);
-            allSeriesWeight.add(series);
+            XYChart.Series series1 = new XYChart.Series();
+            XYChart.Series series2 = new XYChart.Series();
+            series1.setName("Weight");
+            series2.setName("Blood Pressure");
+            allSeriesWeight.add(series1);
+            allSeriesWeight.add(series2);
+            barChartWeight.getData().add(index++, series1);
+            barChartWeight.getData().add(index++, series2);
+            allSeriesWeight.add(series1);
             for (Stats s : allStats) {
-                if (lastday != s.getDay()) {
-                    series = new XYChart.Series();
-                    series.setName(Integer.toString(s.getDay()));
-                    barChartWeight.getData().add(index++, series);
-                    allSeriesWeight.add(series);
-                }
-                series.getData().add(new XYChart.Data("weight", s.getWeight()));
+                series1.getData().add(new XYChart.Data(s.getDay(), s.getWeight()));
+                series2.getData().add(new XYChart.Data(s.getDay(), s.getCholesterol()));
             }
             barChartWeight.setManaged(true);
             FadeInRight fadeInRight = new FadeInRight(barChartWeight);
