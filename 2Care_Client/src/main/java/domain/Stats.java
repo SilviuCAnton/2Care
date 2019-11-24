@@ -1,16 +1,29 @@
 package domain;
 
-public class Stats {
+import java.util.concurrent.ThreadLocalRandom;
+
+public class Stats extends Entity<Integer> {
     private double steps;
     private String bloodPressure;
     private int cholesterol;
     private double weight;
+    private int week;
 
-    public Stats(double steps, String bloodPressure, int cholesterol, double weight) {
+    public Stats(Integer id, double steps, String bloodPressure, int cholesterol, double weight) {
+        super.setId(id);
         this.steps = steps;
         this.bloodPressure = bloodPressure;
         this.cholesterol = cholesterol;
         this.weight = weight;
+        this.week = ThreadLocalRandom.current().nextInt(1, 7);
+    }
+
+    public int getWeek() {
+        return week;
+    }
+
+    public void setWeek(int week) {
+        this.week = week;
     }
 
     public double getSteps() {
@@ -43,5 +56,13 @@ public class Stats {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "steps=" + steps +
+                ", bloodPressure='" + bloodPressure + '\'' +
+                ", cholesterol=" + cholesterol +
+                ", weight=" + weight;
     }
 }
