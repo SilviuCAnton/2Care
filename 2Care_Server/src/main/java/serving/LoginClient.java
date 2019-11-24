@@ -15,7 +15,7 @@ import java.util.List;
 public class LoginClient implements Runnable {
     private Socket client;
     private UserAccountDBRepository userAccountDBRepository;
-    private ObjectInputStream in;
+    private ObjectInputStream  in;
 
     public LoginClient(Socket client, UserAccountDBRepository userAccountDBRepository) {
         try {
