@@ -123,4 +123,26 @@ public class UserAccountDBRepository implements CrudRepository<Integer, UserAcco
             return null;
         }
     }
+
+    public UserAccount findByUsername(String userName, String passWord) {
+        String username, password;
+        boolean isDoctor;
+        int userID;
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM UserAccounts WHERE username = ? AND password = ?;")) {
+            stmt.setString(1, userName);
+            stmt.setString(2, passWord);
+            ResultSet resultSet = stmt.executeQuery();
+            if (!resultSet.next()) {
+                return null;
+            }
+            userID = resultSet.getInt("id");
+            username = resultSet.getString("username");
+            password = resultSet.getString("password");
+            isDoctor = resultSet.getBoolean("isDoctor");
+            return new UserAccount(userID, username, password, isDoctor);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -1,8 +1,7 @@
 
 
-import domain.UserAccount;
 import repositories.UserAccountDBRepository;
-import serving.ServeClient;
+import serving.LoginClient;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -16,7 +15,7 @@ public class MainServer {
             server = new ServerSocket(1256);
             while(true) {
                 Socket client = server.accept();
-                new ServeClient(client,userAccountDBRepository).run();
+                new LoginClient(client,userAccountDBRepository).run();
             }
         } catch (IOException e) {
             e.printStackTrace();
