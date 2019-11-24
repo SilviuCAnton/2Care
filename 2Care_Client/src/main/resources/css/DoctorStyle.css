@@ -13,3 +13,15 @@
     -fx-pref-height: 50px;
     -fx-font-size: 14px;
 }
+
+.follow-up-button {
+    -fx-background-color: #05386b;
+    -fx-text-fill: #edf5e1;
+    -fx-background-radius: 0px;
+    -fx-padding: 15px;
+    -fx-border-radius: 0px;
+
+}
+.follow-up-button:hover{
+    -fx-background-color: #053686;
+}
